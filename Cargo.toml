@@ -1,0 +1,51 @@
+[workspace]
+members = [ "solana-data-demo",
+]
+resolver = "2"
+
+[workspace.dependencies]
+solana-data-core = { path = "./solana-data-core" }
+solana-client = "2.2.7"
+solana-transaction-status-client-types = "2.2.7"
+solana-sdk = "2.2.2"
+anyhow = "1.0.89"
+axum = { version = "0.8.4", features = [
+    "http2",
+    "query",
+    "ws",
+    "tracing",
+    "multipart",
+    "macros",
+] }
+hex = "0.4.3"
+axum-extra = { version = "0.10.1", features = ["typed-header"] }
+chrono = { version = "0.4.41", features = ["serde"] }
+dashmap = "6.1.0"
+jwt-simple = "0.12.10"
+reqwest = { version = "0.12.19", default-features = false, features = [
+    "rustls-tls",
+    "json",
+    "multipart",
+    "stream",
+] }
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.128"
+serde_yaml = "0.9.34-deprecated"
+sqlx = { version = "0.8.6", features = [
+    "chrono",
+    "postgres",
+    "runtime-tokio",
+    "tls-rustls",
+] }
+thiserror = "2.0.12"
+tokio = { version = "1.45.1", features = ["rt", "rt-multi-thread", "macros"] }
+tower = "0.5.1"
+tower-http = { version = "0.6.6", features = [
+    "compression-full",
+    "cors",
+    "fs",
+    "trace",
+] }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+uuid = { version = "1.17.0", features = ["v7", "serde"] }
