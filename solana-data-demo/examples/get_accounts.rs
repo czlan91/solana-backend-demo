@@ -1,12 +1,11 @@
+use crate::red_packet::utils::Account;
 use anchor_client::{
+    Cluster,
     solana_client::rpc_client::RpcClient,
     solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey},
-    Cluster,
 };
-use anchor_lang::{declare_program};
+use anchor_lang::declare_program;
 use std::str::FromStr;
-use crate::red_packet::utils::Account;
-
 declare_program!(red_packet);
 
 #[tokio::main]

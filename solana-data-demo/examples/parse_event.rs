@@ -1,13 +1,14 @@
 use anchor_client::{
+    Cluster,
     solana_client::{
         rpc_client::{GetConfirmedSignaturesForAddress2Config, RpcClient},
         rpc_config::RpcTransactionConfig,
     },
     solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey, signature::Signature},
 };
-use anchor_lang::__private::base64::prelude::BASE64_STANDARD;
 use anchor_lang::__private::base64::Engine;
-use anchor_lang::{declare_program, Discriminator};
+use anchor_lang::__private::base64::prelude::BASE64_STANDARD;
+use anchor_lang::declare_program;
 use solana_transaction_status_client_types::UiTransactionEncoding;
 use std::str::FromStr;
 
@@ -17,7 +18,7 @@ use crate::red_packet::utils::Event;
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     // let rpc_url = "https://api.mainnet-beta.solana.com"; // 主网
-    let rpc_url = "https://api.devnet.solana.com"; // 开发网
+    let rpc_url = Cluster::Devnet.url(); // 开发网
     let rpc_client =
         RpcClient::new_with_commitment(rpc_url.to_string(), CommitmentConfig::confirmed());
 

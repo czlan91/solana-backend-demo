@@ -1,9 +1,9 @@
 use crate::red_packet::utils::Event;
+use anchor_client::Cluster;
 use anchor_client::solana_client::rpc_config::RpcTransactionLogsConfig;
 use anchor_client::solana_sdk::commitment_config::CommitmentConfig;
-use anchor_client::Cluster;
-use anchor_lang::__private::base64::prelude::BASE64_STANDARD;
 use anchor_lang::__private::base64::Engine;
+use anchor_lang::__private::base64::prelude::BASE64_STANDARD;
 use anchor_lang::declare_program;
 use anyhow::{Context, Result};
 use solana_client::pubsub_client::PubsubClient;
@@ -16,6 +16,7 @@ declare_program!(red_packet);
 const RECONNECT_DELAY: Duration = Duration::from_secs(3);
 
 // 经常断开连接，无法使用心跳。只能重连。
+// https://solana.stackexchange.com/questions/15014/invalid-websocket-frame-invalid-status-code-1006
 #[tokio::main]
 async fn main() -> Result<()> {
     let cluster = Cluster::Devnet;

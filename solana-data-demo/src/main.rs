@@ -1,3 +1,5 @@
+#![allow(clippy::too_many_arguments)]
+
 use crate::red_packet::utils::Event;
 use anchor_client::solana_client::rpc_config::RpcTransactionLogsConfig;
 use anchor_client::solana_sdk::commitment_config::CommitmentConfig;
