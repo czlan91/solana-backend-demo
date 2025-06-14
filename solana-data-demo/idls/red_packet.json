@@ -1,5 +1,5 @@
 {
-  "address": "HqSDjxnoR35q8uRMG3LDDvbJ9Hqj4H4bWMPAsBF1hqJq",
+  "address": "7rSdaJc2nJafXjKD39nxmhkmCexUFQsCisg42oyRsqvt",
   "metadata": {
     "name": "red_packet",
     "version": "0.1.0",
@@ -538,96 +538,106 @@
     },
     {
       "code": 6007,
+      "name": "RandomSeedRequired",
+      "msg": "Random seed is required for random amount red packet"
+    },
+    {
+      "code": 6008,
+      "name": "PacketCountTooLarge",
+      "msg": "Packet count exceeds maximum limit"
+    },
+    {
+      "code": 6009,
       "name": "RedPacketExpired",
       "msg": "Red packet has expired"
     },
     {
-      "code": 6008,
+      "code": 6010,
       "name": "RedPacketNotExpired",
       "msg": "Red packet not expired yet"
     },
     {
-      "code": 6009,
+      "code": 6011,
       "name": "AlreadyClaimed",
       "msg": "Already claimed by this user"
     },
     {
-      "code": 6010,
+      "code": 6012,
       "name": "NoPacketsRemaining",
       "msg": "No packets remaining"
     },
     {
-      "code": 6011,
+      "code": 6013,
       "name": "NoFundsToRefund",
       "msg": "No funds available for refund"
     },
     {
-      "code": 6012,
+      "code": 6014,
       "name": "TooManyExpiryChanges",
       "msg": "Cannot change expiry time more than 3 times"
     },
     {
-      "code": 6013,
+      "code": 6015,
       "name": "Unauthorized",
       "msg": "Unauthorized access"
     },
     {
-      "code": 6014,
+      "code": 6016,
       "name": "InvalidAccountOwner",
       "msg": "Invalid account owner"
     },
     {
-      "code": 6015,
+      "code": 6017,
       "name": "InvalidMerkleRoot",
       "msg": "Invalid merkle root format"
     },
     {
-      "code": 6016,
+      "code": 6018,
       "name": "MerkleProofInvalid",
       "msg": "Merkle proof verification failed"
     },
     {
-      "code": 6017,
+      "code": 6019,
       "name": "MerkleProofTooLong",
       "msg": "Merkle proof length exceeds maximum"
     },
     {
-      "code": 6018,
+      "code": 6020,
       "name": "RandomnessError",
       "msg": "Randomness generation error"
     },
     {
-      "code": 6019,
+      "code": 6021,
       "name": "InvalidMint",
       "msg": "Invalid mint account"
     },
     {
-      "code": 6020,
+      "code": 6022,
       "name": "InvalidATA",
       "msg": "Invalid associated token account"
     },
     {
-      "code": 6021,
+      "code": 6023,
       "name": "InsufficientFunds",
       "msg": "Insufficient funds in red packet"
     },
     {
-      "code": 6022,
+      "code": 6024,
       "name": "InsufficientClaimerFunds",
       "msg": "Insufficient funds in claimer account"
     },
     {
-      "code": 6023,
+      "code": 6025,
       "name": "CounterOverflow",
       "msg": "Counter overflow"
     },
     {
-      "code": 6024,
+      "code": 6026,
       "name": "InvalidPoolAta",
       "msg": "Invalid pool ATA"
     },
     {
-      "code": 6025,
+      "code": 6027,
       "name": "InvalidRedPacketId",
       "msg": "Invalid red packet ID"
     }
