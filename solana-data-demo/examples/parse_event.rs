@@ -22,7 +22,7 @@ async fn main() -> anyhow::Result<()> {
     let rpc_client =
         RpcClient::new_with_commitment(rpc_url.to_string(), CommitmentConfig::confirmed());
 
-    let program_id: Pubkey = "HqSDjxnoR35q8uRMG3LDDvbJ9Hqj4H4bWMPAsBF1hqJq".parse()?;
+    let program_id: Pubkey = "7rSdaJc2nJafXjKD39nxmhkmCexUFQsCisg42oyRsqvt".parse()?;
     // todo 可以通过循环，向前找交易。每次 记录 第一个交易，直到找到一个没有日志的
     let config = GetConfirmedSignaturesForAddress2Config {
         before: None,

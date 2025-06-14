@@ -41,7 +41,7 @@ async fn main() -> Result<()> {
 async fn run_subscription(cluster: &Cluster) -> Result<()> {
     let ws_url = cluster.ws_url();
     let filter = RpcTransactionLogsFilter::Mentions(vec![
-        "HqSDjxnoR35q8uRMG3LDDvbJ9Hqj4H4bWMPAsBF1hqJq".to_string(),
+        "7rSdaJc2nJafXjKD39nxmhkmCexUFQsCisg42oyRsqvt".to_string(),
     ]);
 
     let config = RpcTransactionLogsConfig {

@@ -15,7 +15,7 @@ use tokio::time::sleep;
 
 const PROGRAM_DATA: &str = "Program data: ";
 
-const PUBKEY_REDPACKET: &str = "HqSDjxnoR35q8uRMG3LDDvbJ9Hqj4H4bWMPAsBF1hqJq";
+const PUBKEY_REDPACKET: &str = "7rSdaJc2nJafXjKD39nxmhkmCexUFQsCisg42oyRsqvt";
 const RECONNECT_DELAY: Duration = Duration::from_secs(3);
 declare_program!(red_packet);
 use crate::red_packet::utils::Event;
