@@ -7,8 +7,8 @@ use anchor_lang::declare_program;
 use std::str::FromStr;
 use anchor_spl::token_2022::spl_token_2022::extension::{BaseStateWithExtensions, StateWithExtensions};
 use anchor_spl::token_2022::spl_token_2022::extension::metadata_pointer::MetadataPointer;
-use anchor_spl::token_2022::spl_token_2022::extension::token_metadata::TokenMetadata;
 use anchor_spl::token_2022::spl_token_2022::state::Mint;
+use spl_token_metadata_interface::state::TokenMetadata;
 
 declare_program!(red_packet);
 
@@ -20,11 +20,10 @@ async fn main() -> anyhow::Result<()> {
 
     let pubkey = Pubkey::from_str("3QvdZgaBcoqeDrPWVGFaHmo2KCyQfKVQc5J3ygnt3C9M")?;
     let account = rpc_client.get_account(&pubkey)?;
-    
     println!("Account data: {:?}", account);
     let state = StateWithExtensions::<Mint>::unpack(&account.data)?;
 
-    // 尝试解析 MetadataPointer
+    // 解析 MetadataPointer
     match state.get_extension::<MetadataPointer>() {
         Ok(pointer) => {
             println!("\n=== MetadataPointer ===");
@@ -34,20 +33,14 @@ async fn main() -> anyhow::Result<()> {
         Err(_) => println!("\nMetadataPointer 扩展不存在"),
     }
 
-    // 尝试解析 TokenMetadata
+    // 解析 TokenMetadata
     match state.get_extension::<TokenMetadata>() {
         Ok(metadata) => {
+            // TokenMetadata 实现了 Pack，就可以这样解包
             println!("\n=== TokenMetadata ===");
-            println!("名称: {}", metadata.name());
-            println!("符号: {}", metadata.symbol());
-            println!("URI: {}", metadata.uri());
-
-            if !metadata.additional_metadata().is_empty() {
-                println!("\n额外元数据:");
-                for (key, value) in metadata.additional_metadata() {
-                    println!("  {}: {}", key, value);
-                }
-            }
+            println!("名称: {}", metadata.name);
+            println!("符号: {}", metadata.symbol);
+            println!("URI: {}", metadata.uri);
         }
         Err(_) => println!("\nTokenMetadata 扩展不存在"),
     }
