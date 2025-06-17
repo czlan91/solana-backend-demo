@@ -1,8 +1,8 @@
 use crate::red_packet::utils::Account;
 use anchor_client::{
-    Cluster,
     solana_client::rpc_client::RpcClient,
     solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey},
+    Cluster,
 };
 use anchor_lang::declare_program;
 use std::str::FromStr;
@@ -16,7 +16,7 @@ async fn main() -> anyhow::Result<()> {
 
     let pubkey = Pubkey::from_str("AZJpvXzbVt91fhUnTsD8DewKepKTUh7CpoBy1TSqmgq2")?;
     let account = rpc_client.get_account(&pubkey)?;
-    
+
     println!("Account data: {:?}", account);
     match Account::try_from_bytes(&account.data) {
         Ok(Account::RedPacket(red_packet_data)) => {

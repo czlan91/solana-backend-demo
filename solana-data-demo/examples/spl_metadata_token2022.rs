@@ -1,14 +1,15 @@
 use anchor_client::{
-    Cluster,
     solana_client::rpc_client::RpcClient,
     solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey},
+    Cluster,
 };
 use anchor_lang::declare_program;
-use std::str::FromStr;
-use anchor_spl::token_2022::spl_token_2022::extension::{BaseStateWithExtensions, StateWithExtensions};
-use anchor_spl::token_2022::spl_token_2022::extension::metadata_pointer::MetadataPointer;
-use anchor_spl::token_2022::spl_token_2022::state::Mint;
+use borsh::BorshDeserialize;
+use spl_token_2022::extension::metadata_pointer::MetadataPointer;
+use spl_token_2022::extension::{BaseStateWithExtensions, StateWithExtensions};
+use spl_token_2022::state::Mint;
 use spl_token_metadata_interface::state::TokenMetadata;
+use std::str::FromStr;
 
 declare_program!(red_packet);
 
@@ -23,6 +24,7 @@ async fn main() -> anyhow::Result<()> {
     println!("Account data: {:?}", account);
     let state = StateWithExtensions::<Mint>::unpack(&account.data)?;
 
+    println!("=== Mint === {:?}", state);
     // 解析 MetadataPointer
     match state.get_extension::<MetadataPointer>() {
         Ok(pointer) => {
@@ -34,13 +36,23 @@ async fn main() -> anyhow::Result<()> {
     }
 
     // 解析 TokenMetadata
-    match state.get_extension::<TokenMetadata>() {
-        Ok(metadata) => {
-            // TokenMetadata 实现了 Pack，就可以这样解包
-            println!("\n=== TokenMetadata ===");
+    // --- 这里是修复的关键部分 ---
+    // 解析 TokenMetadata (非 Pod 类型)
+    // 1. 使用 get_extension_bytes 获取原始字节
+    // 2. 使用 TokenMetadata::unpack 手动解析字节
+    match state.get_extension_bytes::<TokenMetadata>() {
+        Ok(bytes) => {
+            let metadata = TokenMetadata::try_from_slice(bytes)?;
+            println!("\n=== TokenMetadata (使用 get_extension_bytes + from_bytes) ===");
+            println!("更新权限: {:?}", metadata.update_authority);
+            println!("Mint: {:?}", metadata.mint);
             println!("名称: {}", metadata.name);
             println!("符号: {}", metadata.symbol);
             println!("URI: {}", metadata.uri);
+            println!("额外元数据:");
+            for (key, value) in metadata.additional_metadata {
+                println!("  - {}: {}", key, value);
+            }
         }
         Err(_) => println!("\nTokenMetadata 扩展不存在"),
     }
