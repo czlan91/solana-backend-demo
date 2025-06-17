@@ -44,6 +44,7 @@ async fn main() -> anyhow::Result<()> {
         let tx = rpc_client
             .get_transaction_with_config(&Signature::from_str(&sig.signature)?, config)?;
 
+        println!("===========>    {:?}",tx.transaction.transaction);
         if let Some(meta) = tx.transaction.meta {
             println!("\n--- 交易 {} 的日志 ---", sig.signature);
 
